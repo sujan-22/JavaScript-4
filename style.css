@@ -1,0 +1,17 @@
+/* Sujan Rokad, 000882948 */
+body {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgb(147, 147, 147) !important;
+}
+h1, footer {
+  text-align: center;
+  font-family:'Times New Roman', Times, serif;
+  font-weight: bold;
+  margin: 1em;
+  color: antiquewhite;
+}
+div {
+  margin: 1em;
+  color: azure;
+}

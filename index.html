@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Author: Sujan Rokad, 000882948 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="script.js"></script>
+    <title>SVG</title>
+</head>
+<body>
+    <h1>Birds & Castle</h1>
+    <svg id="canvas" width="1400" height="800">
+        <!-- SKY -->
+        <defs>
+          <linearGradient id="morning" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#b1aef9;stop-opacity:1"></stop>
+            <stop offset="20%" style="stop-color:#b1def8;stop-opacity:1"></stop>
+            <stop offset="30%" style="stop-color:#a6ecf1;stop-opacity:1"></stop>
+            <stop offset="40%" style="stop-color:#d0d1f5;stop-opacity:1"></stop>
+            <stop offset="50%" style="stop-color:#bcdbf6;stop-opacity:1"></stop>
+            <stop offset="60%" style="stop-color:#9fe3f7;stop-opacity:1"></stop>
+            <stop offset="70%" style="stop-color:#b4e0ed;stop-opacity:1"></stop>
+            <stop offset="80%" style="stop-color:#b9f1f6;stop-opacity:1"></stop>
+            <stop offset="90%" style="stop-color:#b7b1f3;stop-opacity:1"></stop>
+            <stop offset="100%" style="stop-color:#f7a0fd;stop-opacity:1"></stop>
+          </linearGradient>
+  
+          <linearGradient id="midday" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#71c3ff;stop-opacity:1"></stop>
+            <stop offset="50%" style="stop-color:#f1f1f1;stop-opacity:1"></stop>
+            <stop offset="100%" style="stop-color:#f9e6c2;stop-opacity:1"></stop>
+          </linearGradient>
+
+          <linearGradient id="evening" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1"></stop>
+            <stop offset="25%" style="stop-color:#ff9f43;stop-opacity:1"></stop>
+            <stop offset="50%" style="stop-color:#ffcc5c;stop-opacity:1"></stop>
+            <stop offset="75%" style="stop-color:#ffb142;stop-opacity:1"></stop>
+            <stop offset="100%" style="stop-color:#8c7ae6;stop-opacity:1"></stop>
+          </linearGradient>
+
+          <linearGradient id="night" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color: rgba(10,7,89,1); stop-opacity: 1;"></stop>
+            <stop offset="73%" style="stop-color: rgba(44,97,232,1); stop-opacity: 1;"></stop>
+            <stop offset="100%" style="stop-color: rgba(44,97,232,1); stop-opacity: 1;"></stop>
+          </linearGradient> 
+        </defs>
+
+        <rect x="0" y="0" width="1400" height="700" fill="url(#morning)" id="sky"></rect> 
+        
+        <defs>
+          <filter id="f1" x="0" y="0">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="6"></feGaussianBlur>
+          </filter>
+        </defs>
+          
+          <!-- BRITHER CENTER CIRCLE -->
+          <circle id="sun" cx="100" cy="100" r="30" fill="gold"></circle>
+          
+          <!-- FLARES -->
+          <circle id="f0" cx="120" cy="60" r="8" fill="#FFC999"></circle>
+          <circle id="f2" cx="140" cy="90" r="5" fill="#FFC200"></circle>
+          <circle id="f3" cx="95" cy="70" r="3" fill="#FFC300"></circle>
+          <circle id="f4" cx="80" cy="50" r="2" fill="#FFC200"></circle>
+          <circle id="f5" cx="70" cy="120" r="4" fill="#FFC200"></circle>
+          <circle id="f6" cx="80" cy="140" r="3" fill="#FFC200"></circle>
+          <circle id="f7" cx="110" cy="130" r="2" fill="#FF999"></circle>
+          
+          <!-- OUTER GLOW -->
+          <circle id="sun3" cx="100" cy="100" r="80" stroke="none" fill="url(#corona-gradient)"></circle>
+          
+          <!-- OUTER GLOW -->
+          <radialGradient id="corona-gradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="50%" stop-color="#FFF010" stop-opacity="1"></stop>
+            <stop offset="90%" stop-color="#FFF000" stop-opacity="0.2"></stop>
+          </radialGradient>
+          
+          <!-- LENS FLARE -->
+          <circle id="f8" cx="100" cy="100" r="20" stroke="none" fill="#FFFBB9" opacity="0.2"></circle>
+
+        <!-- LAND -->
+        <g id="land">
+          <linearGradient id="landGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#17220f;stop-opacity:1"></stop>
+            <stop offset="100%" style="stop-color:#292f25;stop-opacity:1"></stop>
+          </linearGradient>
+          <path d="M0,600 L0,800 Q900,650 1400,800 L1400,600" fill="url(#landGradient)"></path>
+          <path d="M0,600 L0,800 L1400,800 L1400,600 Q900,650 800,579 Q650,600 598,600 Q400,800 400,600 Q300,600 400,700 S100,600 200,700" fill="#5C823A" opacity="0.9"></path>
+          <path d="M0,800 L0,850 L1400,850 L1400,800" fill="#2A3C16" opacity="0.7"></path>
+        </g>
+        
+        <!-- LIGHT POLE -->
+        <g onclick="toggleLight()">
+          <line x1="530" y1="591" x2="530" y2="450" stroke-width="5" stroke="silver"></line>
+          <rect x="520" y="590" width="20" height="10" fill="#444444"></rect>
+          <circle cx="530" cy="450" r="10" id="lightPole" fill="url(#radialGradient)"></circle>
+          <defs>
+            <radialGradient id="radialGradient">
+              <stop offset="0%" stop-color="gold"></stop>
+              <stop offset="50%" stop-color="#A2E918"></stop>
+              <stop offset="100%" stop-color="#A9FF00"></stop>
+            </radialGradient>
+          </defs>
+        </g>
+        
+        <!-- CASTLE: LEFT PILLAR -->
+        <polygon points="600,380 680,380 680,600 600,600" fill="#4F3B37"></polygon>
+
+        <!-- VERTICAL LINES -->
+        <line x1="600" y1="405" x2="680" y2="405" stroke="black" stroke-width="3"></line>
+        <line x1="600" y1="420" x2="680" y2="420" stroke="black" stroke-width="3"></line>
+        <line x1="600" y1="435" x2="680" y2="435" stroke="black" stroke-width="3"></line>
+        <line x1="600" y1="435" x2="680" y2="435" stroke="black" stroke-width="3"></line>
+        <line x1="600" y1="450" x2="680" y2="450" stroke="black" stroke-width="3"></line>
+        <line x1="600" y1="465" x2="680" y2="465" stroke="black" stroke-width="3"></line>
+        <line x1="600" y1="480" x2="680" y2="480" stroke="black" stroke-width="3"></line>
+        <line x1="600" y1="495" x2="680" y2="495" stroke="black" stroke-width="3"></line>
+        <line x1="600" y1="510" x2="680" y2="510" stroke="black" stroke-width="3"></line>
+        <line x1="600" y1="525" x2="680" y2="525" stroke="black" stroke-width="3"></line>
+        <line x1="600" y1="540" x2="680" y2="540" stroke="black" stroke-width="3"></line>
+        <line x1="600" y1="555" x2="680" y2="555" stroke="black" stroke-width="3"></line>
+        <line x1="600" y1="570" x2="680" y2="570" stroke="black" stroke-width="3"></line>
+        <line x1="600" y1="585" x2="680" y2="585" stroke="black" stroke-width="3"></line>
+        <line x1="600" y1="599" x2="680" y2="599" stroke="black" stroke-width="3"></line>
+        
+        <circle cx="640" cy="530" r="15" fill="url(#night-light)"></circle>
+        <rect x="625.1" y="529" width="29.8" height="35" fill="url(#night-light)"></rect>
+        <linearGradient id="night-light" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#ffdd00;stop-opacity:1"></stop>
+          <stop offset="25%" style="stop-color:#ff8600;stop-opacity:1"></stop>
+          <stop offset="50%" style="stop-color:#ff2d00;stop-opacity:1"></stop>
+          <stop offset="75%" style="stop-color:#c71e00;stop-opacity:1"></stop>
+          <stop offset="100%" style="stop-color:#750f00;stop-opacity:1"></stop>
+        </linearGradient>
+        
+        
+        <polygon points="590,380 690,380 690,400 590,400" fill="#402E02"></polygon>
+        <polygon points="610,400 670,400 670,415 610,415" fill="#ADBC90"></polygon>   
+        
+        <polygon points="595,365 610,365 610,380 595,380" fill="#2A2626"></polygon>
+        <polygon points="620,365 635,365 635,380 620,380" fill="#2A2626"></polygon>
+        <polygon points="645,365 660,365 660,380 645,380" fill="#2A2626"></polygon>
+        <polygon points="670,365 685,365 685,380 670,380" fill="#2A2626"></polygon>
+    
+        <!-- CASTLE: MIDDLE AREA -->
+        <polygon points="680,430 880,430 880,600 680,600" fill="#2A2626"></polygon>
+        <polygon points="780,450 830,480 730,480" fill="#ADBC90"></polygon>
+        <polygon points="730,480 830,480 830,600 730,600" fill="#ADBC90"></polygon>
+        <polygon points="700,330 860,330 860,431 700,431" fill="#757E7E"></polygon>
+
+        <polygon points="740,260 820,260 820,330 740,330" fill="#402E02"></polygon>
+
+        <polygon points="780,180 820,260 740,260" fill="#132815"></polygon>
+
+        <polygon points="780,130 780,160 830,145" fill="red"></polygon>
+        
+        <polygon points="780,130 780,160 830,145" fill="red" filter="url(#wave)"></polygon>
+        <line x1="780" y1="185" x2="780" y2="130" stroke="black" stroke-width="5"></line>
+
+          <circle cx="780" cy="280" r="15" fill="#ADBC90"></circle>
+          <rect x="765.1" y="280" width="29.8" height="35" fill="#ADBC90"></rect>
+      
+        <!-- LEFT DOOR -->
+        <polygon points="780,450 780,600 730,600 730,480" id="left-door" fill="maroon"></polygon>
+        <circle cx="770" cy="560" r="3" fill="gold"></circle> 
+
+        <!-- RIGHT DOOR -->
+        <polygon points="780,450 780,600 830,600 830,480" id="right-door" fill="maroon"></polygon>
+        <circle cx="790" cy="560" r="3" fill="gold"></circle> 
+        <line x1="780" y1="450" x2="780" y2="600" stroke="black" stroke-width="1"></line>
+
+        <!-- CASTLE: RIGHT PILLAR -->
+        <polygon points="880,380 960,380 960,600 880,600" fill="#4F3B37"></polygon>
+
+        <line x1="880" y1="405" x2="960" y2="405" stroke="black" stroke-width="3"></line>
+        <line x1="880" y1="420" x2="960" y2="420" stroke="black" stroke-width="3"></line>
+        <line x1="880" y1="435" x2="960" y2="435" stroke="black" stroke-width="3"></line>
+        <line x1="880" y1="435" x2="960" y2="435" stroke="black" stroke-width="3"></line>
+        <line x1="880" y1="450" x2="960" y2="450" stroke="black" stroke-width="3"></line>
+        <line x1="880" y1="465" x2="960" y2="465" stroke="black" stroke-width="3"></line>
+        <line x1="880" y1="480" x2="960" y2="480" stroke="black" stroke-width="3"></line>
+        <line x1="880" y1="495" x2="960" y2="495" stroke="black" stroke-width="3"></line>
+        <line x1="880" y1="510" x2="960" y2="510" stroke="black" stroke-width="3"></line>
+        <line x1="880" y1="525" x2="960" y2="525" stroke="black" stroke-width="3"></line>
+        <line x1="880" y1="540" x2="960" y2="540" stroke="black" stroke-width="3"></line>
+        <line x1="880" y1="555" x2="960" y2="555" stroke="black" stroke-width="3"></line>
+        <line x1="880" y1="570" x2="960" y2="570" stroke="black" stroke-width="3"></line>
+        <line x1="880" y1="585" x2="960" y2="585" stroke="black" stroke-width="3"></line>
+        <line x1="880" y1="599" x2="960" y2="599" stroke="black" stroke-width="3"></line>
+        
+        <circle cx="920" cy="530" r="15" fill="url(#night-light)"></circle>
+        <rect x="905.1" y="529" width="29.8" height="35" fill="url(#night-light)"></rect>
+        <linearGradient id="night-light" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#ffdd00;stop-opacity:1"></stop>
+          <stop offset="25%" style="stop-color:#ff8600;stop-opacity:1"></stop>
+          <stop offset="50%" style="stop-color:#ff2d00;stop-opacity:1"></stop>
+          <stop offset="75%" style="stop-color:#c71e00;stop-opacity:1"></stop>
+          <stop offset="100%" style="stop-color:#750f00;stop-opacity:1"></stop>
+        </linearGradient>
+
+        <polygon points="870,380 970,380 970,400 870,400" fill="#402E02"></polygon>
+        <polygon points="890,400 950,400 950,415 890,415" fill="#ADBC90"></polygon>   
+        
+        <polygon points="875,365 890,365 890,380 875,380" fill="#2A2626"></polygon>
+        <polygon points="900,365 915,365 915,380 900,380" fill="#2A2626"></polygon>
+        <polygon points="925,365 940,365 940,380 925,380" fill="#2A2626"></polygon>
+        <polygon points="950,365 965,365 965,380 950,380" fill="#2A2626"></polygon>
+      </svg>
+      
+      <div>
+        <button type="button" id="b1" onclick="Morning()" class="btn btn-light">Morning</button>
+        <button type="button" id="b2" onclick="Midday()" class="btn btn-primary">Midday</button>
+        <button type="button" id="b3" onclick="Evening()" class="btn btn-warning">Evening</button>
+        <button type="button" id="b4" onclick="Night()" class="btn btn-dark">Night</button>
+        <button type="button" id="b5" onclick="Day()" class="btn btn-info">Automatic</button>
+        <button type="button" id="addBird" class="btn btn-success">Add Birds</button>
+        
+        <button type="button" class="btn btn-primary">
+          Score <span class="badge bg-secondary" id="score">0</span>
+        </button>
+      </div>
+
+      <div>
+      <p><strong>Info</strong></p>
+        <ul>
+          <li>There are buttons such as Morning, Midday, Evening & Night that let user control day time.</li>
+          <li>Automatic will work automatically to change between day and night.</li>
+          <li>Add birds but will allow user to generate random number of birds that will move from left to right-door
+            <ul>
+              <li>Birds will come in red and black color.</li>
+              <li>Black ones are innocient where as reds aren't.</li>
+            </ul>
+          </li>
+          <li>You can kill birds by clicking on birds.
+            <ul>
+              <li>If you kill red birds then your score will increase and if you kill black birds then your score will decrease.</li>
+              <li>If you click on black bird then its color will change to a random color.</li>
+            </ul>
+          </li>
+          <li>If score becomes 0 then game will automatically reload and you have to generate birds again by pressing add birds button</li>
+          <li>Score displays on the screen.</li>
+          <li>There's a light pole which turns off if you click on light and if sun sets to a night then ligh will automatically go on.</li>
+        </ul>      
+      </div>
+
+    <footer>
+      <p>&#169; Sujan Rokad, Mohawk College 2023</p>
+    </footer>
+  </body>
+</html>
